@@ -9,4 +9,5 @@ void loop()
   float v=a*3.3/1023.0;
 
   Serial.println(v);
+  delay(100);
 }
