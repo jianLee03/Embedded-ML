@@ -13,14 +13,25 @@ void loop(){
     count = 1 - count;
     if (count == 1){
       digitalWrite(D13, HIGH);
-      Serial.println("SWITCH ON");
+      //Serial.println("SWITCH ON");
     }
     else{
       digitalWrite(D13, LOW);
-      Serial.println("SWITCH OFF");
+      //Serial.println("SWITCH OFF");
     }
-    delay(50); 
+    delay(50);
   }
   prevSwitchState = switchState;
-  Serial.println(count);
+
+  if (count == 1){
+    int a = analogRead(A0);
+    //float v = a * 3.3 / 1023.0;
+    //Serial.print(v);
+    if(a>350){
+      //어두운 곳
+    }
+    else{
+      //밝은 곳
+    }
+  }
 }
