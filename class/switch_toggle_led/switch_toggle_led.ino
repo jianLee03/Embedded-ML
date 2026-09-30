@@ -28,10 +28,10 @@ void loop(){
     //float v = a * 3.3 / 1023.0;
     //Serial.print(v);
     if(a>350){
-      //어두운 곳
+      tone(D8,2000);
     }
     else{
-      //밝은 곳
+      noTone(D8);
     }
   }
 }
