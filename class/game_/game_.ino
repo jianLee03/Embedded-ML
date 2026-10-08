@@ -113,29 +113,36 @@ void loop() {
 
     case READY:
 
-      if (hit6) {
+      if (justPressed) {
+
+        Serial.println("D4 부정출발!");
+        tone(D9, 200, 600);
+        digitalWrite(D13, LOW);
+        
+       st = WAIT;
+      }
+
+      else if (hit6) {
 
         Serial.println("D6 부정출발!");
-
         tone(D9, 200, 600);
-
         digitalWrite(D13, LOW);
 
         st = WAIT;
       }
 
-      else if (millis() - t0 > waitMs) {
+  else if (millis() - t0 > waitMs) {
 
-        tone(D9, 2000);
+    tone(D9, 2000);
 
-        goTime = millis();
+    goTime = millis();
 
-        Serial.println("GO!");
+    Serial.println("GO!");
 
-        st = GO;
-      }
+    st = GO;
+  }
 
-      break;
+  break;
 
 
     case GO:
