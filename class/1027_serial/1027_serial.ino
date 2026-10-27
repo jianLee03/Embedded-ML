@@ -1,15 +1,10 @@
+Uart testSerial(PA10, PA9);
+
 void setup() {
-  Serial.begin(9600);
-  pinMode(D1, OUTPUT);
-  pinMode(D8, OUTPUT);
+  testSerial.begin(9600);
 }
 
 void loop() {
-  Serial.write('U');
-  digitalWrite(D1,HIGH);
-  digitalWrite(D8,HIGH);
-  delay(100);
-  digitalWrite(D1,LOW);
-  digitalWrite(D8,LOW);
-  delay(100);
+  testSerial.write('Q');
+  delay(50);
 }
