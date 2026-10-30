@@ -1,0 +1,46 @@
+
+int base; // 시작할 때(밝을 때)의 밝기
+bool alarm = false; // 지금 경보 중인가?
+
+void setup()
+{
+    Serial.begin(9600);
+
+    pinMode(D4, INPUT_PULLUP); // 해제 버튼
+    pinMode(D6, INPUT_PULLUP); // 비상 버튼 ①
+    pinMode(D9, OUTPUT);       // 부저
+    pinMode(D12, OUTPUT);      // 마커
+    pinMode(D13, OUTPUT);      // 내장 LED
+
+    delay(500);
+    base = analogRead(A0); // 밝은 곳에서 리셋하기
+}
+
+void loop()
+{
+    int d = abs(analogRead(A0) - base);
+    Serial.println(d);
+
+    bool dark = (d > 176.7 ); // ② 임계값
+
+    if (dark)
+        digitalWrite(D13, HIGH); // 어두우면 LED 켜기
+    else
+        digitalWrite(D13, LOW);
+
+    if (dark && digitalRead(D6) == LOW && !alarm) // ③ 비상 버튼 눌림
+    {
+        tone(D9, 2000); // ④ 부저 2 kHz
+        digitalWrite(D12, HIGH);
+        alarm = true;
+    }
+
+    if (alarm && digitalRead(D4) == LOW) // 해제 버튼
+    {
+        noTone(D9); // ⑤ 소리 끄기
+        digitalWrite(D12, LOW);
+        alarm = false;
+    }
+
+    delay(50);
+}
