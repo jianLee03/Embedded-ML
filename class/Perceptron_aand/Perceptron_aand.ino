@@ -6,7 +6,7 @@ int X[4][2] = {{0,0},{0,1},{1,0},{1,1}};
 int T[4] = {0,0,0,1};
  
 float w1 = 0, w2 = 0, b = 0;
-float lr = 0.25;  // 학습률
+float lr = 0.01;  // 학습률
 void setup() {
   Serial.begin(115200);
   pinMode(SW1, INPUT_PULLUP);
@@ -29,13 +29,13 @@ int predict(int x1, int x2) {
 }
 void train()
 {
-  for (int epoch = 1; epoch <= 20; epoch++)
+  for (int epoch = 1; epoch <= 1000; epoch++)
   {
     int errors = 0;
     for (int i = 0; i < 4; i++)
     {
-      int x1 = X[i][0], x2 = X[i][1];
-      int e = T[i] - predict(x1, x2);
+      int x1 = X[i][0], x2 = X[i][1]; //배열 접근 방법
+      int e = T[i] - predict(x1, x2); 
       if (e != 0)
       {
         errors++;
